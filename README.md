@@ -37,5 +37,9 @@ It supports Windows, Linux, and macOS systems.
 After execution, the following files will be created:
 
 data/connections.txt
+
 NODE.csv
+
 EDGE.csv
+
+Then Import outputs to Gephi to Analyze 
