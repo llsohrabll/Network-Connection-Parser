@@ -33,3 +33,9 @@ It supports Windows, Linux, and macOS systems.
 
    ```bash
    python script.py
+
+After execution, the following files will be created:
+
+data/connections.txt
+NODE.csv
+EDGE.csv
