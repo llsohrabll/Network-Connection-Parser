@@ -1,72 +1,35 @@
-Network Connection Parser
-Overview
-This script detects active TCP network connections on your system, filters out local or non-established connections, and exports the parsed data into CSV files for further analysis or visualization. It supports Windows, Linux, and macOS.
+# Network Connection Parser
 
-The output includes two files:
+## Overview
 
-NODE.csv: List of unique IP addresses involved in connections, flagged as internal or external.
+This Python script detects active TCP network connections on your machine, filters out non-established or local-only connections, and exports the results to CSV files for further analysis or visualization.
 
-EDGE.csv: Details of connections between IPs, including protocol and connection type.
+It supports Windows, Linux, and macOS systems.
 
-Features
-Automatically detects the operating system and uses the appropriate network command:
+## Features
 
-netstat -ano on Windows
+- OS-aware command execution:
+  - Uses `netstat -ano` on Windows
+  - Uses `ss -ant` on Linux and macOS
+- Filters for established TCP connections only
+- Identifies internal (private) vs external IP addresses
+- Outputs structured data into:
+  - `NODE.csv` (list of unique IP addresses)
+  - `EDGE.csv` (network connections between IPs)
 
-ss -ant on Linux/macOS
+## Output Files
 
-Filters for established TCP connections only
+| File Name              | Description |
+|------------------------|-------------|
+| `data/connections.txt` | Raw output of filtered TCP connections |
+| `NODE.csv`             | List of unique IPs labeled as internal or external |
+| `EDGE.csv`             | Detailed edges with source, target, protocol, and metadata |
 
-Parses source and destination IPs, ignoring localhost and unspecified addresses
+## Usage
 
-Identifies whether IPs are internal (private ranges) or external
+1. Ensure you have Python 3 installed.
+2. Clone this repository or download the script file.
+3. Run the script from your terminal:
 
-Outputs results into structured CSV files for use in graphing tools or further processing
-
-Output Files
-data/connections.txt: Raw filtered output from netstat or ss
-
-NODE.csv: List of unique nodes (IP addresses), with a flag indicating whether each is internal
-
-EDGE.csv: Directed edges showing which IPs are connected, the protocol used, and metadata for graphing
-
-Usage
-Clone the repository or copy the script locally.
-
-Run the script using Python 3:
-
-bash
-Copy
-Edit
-python script.py
-After execution, the following files will be generated in the same directory:
-
-data/connections.txt
-
-NODE.csv
-
-EDGE.csv
-
-Dependencies
-This script uses only standard Python libraries:
-
-subprocess
-
-platform
-
-os
-
-No external packages are required.
-
-Notes
-The script excludes connections to/from 127.0.0.1 and 0.0.0.0.
-
-Private IP ranges are flagged as internal:
-
-10.0.0.0/8
-
-172.16.0.0/12
-
-192.168.0.0/16
-
-Ensure Python has permission to run netstat or ss depending on your system.
+   ```bash
+   python script.py
